@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Genre Classification</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Music Genre Classification</h1>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <form action="/" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" id="audioUpload" accept="audio/*" required>
+                <button type="submit">Classify</button>
+            </form>
+            <div id="audioContainer">
+                {% if audio_path %}
+                    <audio id="uploadedAudio" controls>
+                        <source src="{{ url_for('static', filename='uploads/' + audio_path) }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p id="genrePrediction">{{ prediction }}</p>
+                {% else %}
+                    <p id="genrePrediction">No prediction yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
